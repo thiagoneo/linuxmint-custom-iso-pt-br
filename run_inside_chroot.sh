@@ -47,8 +47,9 @@ PKG_REMOVE=(
     # Thunderbird locales and app
     thunderbird*
 
-    # LibreOffice (UI + help + l10n)
-    libreoffice*
+    # LibreOffice locales and help files (non-pt)
+    libreoffice-help*
+    libreoffice-l10n*
 
     # Spell/Hyphen/mythes dictionaries (non-pt)
     aspell-en
@@ -108,6 +109,9 @@ PKG_INSTALL=(
     language-pack-pt
     language-pack-gnome-pt-base
     language-pack-gnome-pt
+    libreoffice-help-pt-br
+    libreoffice-l10n-pt-br
+    libreoffice-lightproof-pt-br
     ntfs-3g
     testdisk
     wbrazilian
