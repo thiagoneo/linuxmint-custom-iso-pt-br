@@ -97,7 +97,10 @@ PKG_REMOVE=(
     transmission*
     simple-scan
     mintchat
-
+    drawing
+    pix
+    warpinator
+    thingy
   )
 
 PKG_INSTALL=(
