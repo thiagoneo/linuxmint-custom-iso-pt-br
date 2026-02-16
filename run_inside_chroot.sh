@@ -113,18 +113,6 @@ PKG_INSTALL=(
     wbrazilian
 )
 
-# Allow dots (.) in usernames.
-sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
-sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\$USER\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
-sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask-oem
-sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\$USER\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask-oem
-sed -i '/^NAME_REGEX=/d' /etc/adduser.conf
-echo "NAME_REGEX='^[a-z][-.a-z0-9_]*$'" >> /etc/adduser.conf
-
-# Configure Ubiquity to use the preseed file and set it to automatic mode
-sed -i 's|^Exec=.*|Exec=sudo --preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_DATA_DIRS,XDG_RUNTIME_DIR,GTK_THEME sh -c '\''debconf-set-selections /cdrom/preseed/preseed.cfg && WEBKIT_DISABLE_COMPOSITING_MODE=1 ubiquity gtk_ui --automatic'\''|' /usr/share/applications/ubiquity.desktop
-
-
 # Update system packages
 apt update
 
@@ -146,3 +134,15 @@ apt upgrade -y
 apt autoremove --purge -y
 apt clean -y
 sudo apt remove --purge "${PKG_REMOVE[@]}"
+sudo apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork
+
+# Allow dots (.) in usernames.
+sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
+sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\$USER\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
+sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask-oem
+sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\$USER\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask-oem
+sed -i '/^NAME_REGEX=/d' /etc/adduser.conf
+echo "NAME_REGEX='^[a-z][-.a-z0-9_]*$'" >> /etc/adduser.conf
+
+# Configure Ubiquity to use the preseed file and set it to automatic mode
+sed -i 's|^Exec=.*|Exec=sudo --preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_DATA_DIRS,XDG_RUNTIME_DIR,GTK_THEME sh -c '\''debconf-set-selections /cdrom/preseed/preseed.cfg && WEBKIT_DISABLE_COMPOSITING_MODE=1 ubiquity gtk_ui --automatic'\''|' /usr/share/applications/ubiquity.desktop
