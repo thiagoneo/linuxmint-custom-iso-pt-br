@@ -1,2 +1,2 @@
 # linuxmint-custom-iso-pt-br
-Gere uma ISO customizada do Linux Mint
+Templates e scripts para gerar uma ISO customizada do Linux Mint com o [Cubic (Custom Ubuntu ISO Creator)](https://github.com/PJ-Singh-001/Cubic).
