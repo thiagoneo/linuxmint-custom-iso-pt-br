@@ -108,6 +108,10 @@ sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\
 sed -i '/^NAME_REGEX=/d' /etc/adduser.conf
 echo "NAME_REGEX='^[a-z][-.a-z0-9_]*$'" >> /etc/adduser.conf
 
+# Configure Ubiquity to use the preseed file and set it to automatic mode
+sed -i 's|^Exec=.*|Exec=sudo --preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_DATA_DIRS,XDG_RUNTIME_DIR,GTK_THEME sh -c '\''debconf-set-selections /cdrom/preseed/preseed.cfg && WEBKIT_DISABLE_COMPOSITING_MODE=1 ubiquity gtk_ui --automatic'\''|' /usr/share/applications/ubiquity.desktop
+
+
 # Update system packages
 apt update
 
