@@ -22,8 +22,10 @@ HASH=$(openssl passwd -6 "$PASSWORD")
 # Local do preseed dentro da ISO
 PRESEED_DIR="custom-disk/preseed"
 PRESEED_FILE="${PRESEED_DIR}/preseed.cfg"
+CASPER_DIR="custom-disk/casper"
 
 mkdir -p $PRESEED_DIR
+mkdir -p $CASPER_DIR
 
 rm -rf $PRESEED_FILE
 
@@ -71,3 +73,8 @@ EOF
 
 echo
 echo "preseed.cfg gerado com sucesso em $PRESEED_FILE"
+
+# Copiar arquivo filesystem.manifest-remove
+rm -f "$CASPER_DIR/filesystem.manifest-remove"
+cp "filesystem.manifest-remove" $CASPER_DIR/
+echo "Arquivo filesystem.manifest-remove copiado para $CASPER_DIR/"

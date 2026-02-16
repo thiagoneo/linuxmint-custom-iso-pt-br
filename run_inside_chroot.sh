@@ -104,6 +104,10 @@ PKG_INSTALL=(
     dosfstools
     exfatprogs
     gparted
+    language-pack-pt-base
+    language-pack-pt
+    language-pack-gnome-pt-base
+    language-pack-gnome-pt
     ntfs-3g
     testdisk
     wbrazilian
