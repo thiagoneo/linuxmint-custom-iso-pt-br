@@ -100,6 +100,16 @@ PKG_REMOVE=(
 
   )
 
+PKG_INSTALL=(
+    clonezilla
+    dosfstools
+    exfatprogs
+    gparted
+    ntfs-3g
+    testdisk
+    wbrazilian
+)
+
 # Allow dots (.) in usernames.
 sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
 sed -i "s/LC_ALL=C expr \"\$USER\" : '\[a-z\]\[-a-z0-9_\]\*\$'/LC_ALL=C expr \"\$USER\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
@@ -114,6 +124,12 @@ sed -i 's|^Exec=.*|Exec=sudo --preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_DATA_DI
 
 # Update system packages
 apt update
+
+# Install additional packages
+if [ ${#PKG_INSTALL[@]} -gt 0 ]; then
+  echo "Installing additional packages..."
+  apt install -y "${PKG_INSTALL[@]}"
+fi
 
 # Remove unwanted locale/language packages if list is set
 if [ ${#PKG_REMOVE[@]} -gt 0 ]; then
