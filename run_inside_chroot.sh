@@ -122,4 +122,4 @@ fi
 apt upgrade -y
 apt autoremove --purge -y
 apt clean -y
-sudo apt remove --purge --simulate "${PKG_REMOVE[@]}"
+sudo apt remove --purge "${PKG_REMOVE[@]}"
