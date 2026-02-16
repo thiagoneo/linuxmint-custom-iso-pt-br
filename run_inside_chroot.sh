@@ -45,40 +45,10 @@ PKG_REMOVE=(
     firefox-locale-ru
 
     # Thunderbird locales and app
-    thunderbird
-    thunderbird-locale-de
-    thunderbird-locale-en
-    thunderbird-locale-es
-    thunderbird-locale-fr
-    thunderbird-locale-it
-    thunderbird-locale-nl
-    thunderbird-locale-ru
+    thunderbird*
 
     # LibreOffice (UI + help + l10n)
-    libreoffice-core
-    libreoffice-writer
-    libreoffice-calc
-    libreoffice-impress
-    libreoffice-draw
-    libreoffice-base-core
-    libreoffice-gnome
-    libreoffice-gtk3
-    libreoffice-l10n-de
-    libreoffice-l10n-en-gb
-    libreoffice-l10n-en-za
-    libreoffice-l10n-es
-    libreoffice-l10n-fr
-    libreoffice-l10n-it
-    libreoffice-l10n-nl
-    libreoffice-l10n-ru
-    libreoffice-help-de
-    libreoffice-help-en-gb
-    libreoffice-help-en-us
-    libreoffice-help-es
-    libreoffice-help-fr
-    libreoffice-help-it
-    libreoffice-help-nl
-    libreoffice-help-ru
+    libreoffice*
 
     # Spell/Hyphen/mythes dictionaries (non-pt)
     aspell-en
@@ -121,12 +91,10 @@ PKG_REMOVE=(
     wspanish
 
     # media / communication / extras
-    rhythmbox
-    rhythmbox-plugins
+    rhythmbox*
     celluloid
     hypnotix
-    transmission-gtk
-    transmission-common
+    transmission*
     simple-scan
     mintchat
 
