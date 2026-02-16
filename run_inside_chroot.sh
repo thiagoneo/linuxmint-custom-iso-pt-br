@@ -12,6 +12,6 @@ echo "NAME_REGEX='^[a-z][-.a-z0-9_]*$'" >> /etc/adduser.conf
 
 # Update system packages
 apt update
-apt -y upgrade
-apt -y autoremove --purge
-apt -y clean
+apt upgrade -y
+apt autoremove --purge -y
+apt clean -y
