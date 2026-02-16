@@ -44,7 +44,7 @@ PKG_REMOVE=(
     firefox-locale-nl
     firefox-locale-ru
 
-    Thunderbird locales and app
+    # Thunderbird locales and app
     thunderbird
     thunderbird-locale-de
     thunderbird-locale-en
