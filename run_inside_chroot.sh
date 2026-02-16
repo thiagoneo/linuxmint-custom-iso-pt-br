@@ -84,7 +84,6 @@ PKG_REMOVE=(
     mythes-it
     mythes-pt-pt
     mythes-ru
-    wamerican
     wbritish
     wfrench
     witalian
