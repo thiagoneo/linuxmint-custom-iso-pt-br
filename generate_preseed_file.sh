@@ -5,8 +5,8 @@ set -e
 # Gerar arquivo preseed
 echo "=== Gerador de preseed.cfg ==="
 echo
-read -p "Digite o nome do usuário: " USERNAME
-read -s -p "Digite a senha: " PASSWORD
+read -p "Digite o nome do usuário administrador: " USERNAME
+read -s -p "Digite a senha (também será utiliada pelo root): " PASSWORD
 echo
 read -s -p "Confirme a senha: " PASSWORD2
 echo
@@ -52,7 +52,7 @@ d-i keyboard-configuration/confirm boolean true
 d-i time/zone string America/Sao_Paulo
 
 ### Usuário
-d-i passwd/root-login boolean false
+d-i passwd/user-password-crypted password $HASH
 d-i passwd/user-fullname string $USERNAME
 d-i passwd/username string $USERNAME
 d-i passwd/user-password-crypted password $HASH
@@ -72,7 +72,7 @@ d-i finish-install/reboot_in_progress note
 EOF
 
 echo
-echo "preseed.cfg gerado com sucesso em $PRESEED_FILE"
+echo "Arquivo preseed.cfg gerado com sucesso em $PRESEED_FILE"
 
 # Copiar arquivo filesystem.manifest-remove
 rm -f "$CASPER_DIR/filesystem.manifest-remove"
