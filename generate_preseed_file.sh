@@ -35,10 +35,14 @@ d-i auto-install/enable boolean true
 d-i debconf/priority select critical
 
 ### Idioma
+### Idioma
 d-i debian-installer/locale string pt_BR.UTF-8
+# Gerar apenas o locale pt_BR (evita gerar outros idiomas)
+d-i locales/locales_to_be_generated multiselect pt_BR.UTF-8 UTF-8
+d-i locales/default_environment_locale select pt_BR.UTF-8
+
 d-i localechooser/languagelist select pt
 d-i localechooser/countrylist select BR
-d-i localechooser/supported-locales multiselect pt_BR.UTF-8
 d-i localechooser/preferred-locale string pt_BR.UTF-8
 d-i localechooser/shortlist select BR
 

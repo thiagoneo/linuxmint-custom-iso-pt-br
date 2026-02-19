@@ -140,8 +140,11 @@ fi
 apt upgrade -y
 apt autoremove --purge -y
 apt clean -y
-sudo apt remove --purge "${PKG_REMOVE[@]}"
-sudo apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork
+apt remove --purge "${PKG_REMOVE[@]}"
+apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork
+
+dpkg-reconfigure locales
+dpkg-reconfigure keyboard-configuration
 
 # Allow dots (.) in usernames.
 sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
