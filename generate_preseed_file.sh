@@ -36,6 +36,11 @@ d-i debconf/priority select critical
 
 ### Idioma
 d-i debian-installer/locale string pt_BR.UTF-8
+d-i localechooser/languagelist select pt
+d-i localechooser/countrylist select BR
+d-i localechooser/supported-locales multiselect pt_BR.UTF-8
+d-i localechooser/preferred-locale string pt_BR.UTF-8
+d-i localechooser/shortlist select BR
 
 ### Teclado ABNT2
 d-i console-setup/ask_detect boolean false
@@ -50,6 +55,8 @@ d-i keyboard-configuration/confirm boolean true
 
 ### Fuso horário
 d-i time/zone string America/Sao_Paulo
+d-i clock-setup/utc boolean true
+d-i clock-setup/ntp boolean true
 
 ### Usuário
 d-i passwd/user-password-crypted password $HASH
