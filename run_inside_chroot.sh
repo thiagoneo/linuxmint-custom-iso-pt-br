@@ -96,7 +96,7 @@ PKG_REMOVE=(
     hypnotix
     transmission*
     simple-scan
-    mintchat
+    # mintchat
     drawing
     pix
     warpinator
@@ -138,10 +138,10 @@ if [ ${#PKG_REMOVE[@]} -gt 0 ]; then
 fi
 
 apt upgrade -y
-# Remove old kernels and unnecessary packages, and clean up
-apt purge -y $(dpkg -l 'linux-image-[0-9]*' \
-| awk '/^ii/{print $2}' \
-| grep -v "$(uname -r)") && sudo apt autoremove --purge -y
+# # Remove old kernels and unnecessary packages, and clean up
+# apt purge -y $(dpkg -l 'linux-image-[0-9]*' \
+# | awk '/^ii/{print $2}' \
+# | grep -v "$(uname -r)") && sudo apt autoremove --purge -y
 apt autoremove --purge -y
 apt clean -y
 apt remove --purge "${PKG_REMOVE[@]}"
