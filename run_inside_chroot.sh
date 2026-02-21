@@ -138,6 +138,10 @@ if [ ${#PKG_REMOVE[@]} -gt 0 ]; then
 fi
 
 apt upgrade -y
+# Remove old kernels and unnecessary packages, and clean up
+apt purge -y $(dpkg -l 'linux-image-[0-9]*' \
+| awk '/^ii/{print $2}' \
+| grep -v "$(uname -r)") && sudo apt autoremove --purge -y
 apt autoremove --purge -y
 apt clean -y
 apt remove --purge "${PKG_REMOVE[@]}"
@@ -145,6 +149,13 @@ apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-art
 
 dpkg-reconfigure locales
 dpkg-reconfigure keyboard-configuration
+
+# Customize Plymouth theme with spinner/bgrt and Mint text logo
+apt install --no-install-recommends -y librsvg2-bin
+curl https://linuxmint.com/web/img/logo-mono.svg | rsvg-convert -h 64 -o /usr/share/plymouth/themes/spinner/watermark.png
+apt remove --auto-remove --purge -y librsvg2-bin
+plymouth-set-default-theme -R bgrt
+update-initramfs -u -k all
 
 # Allow dots (.) in usernames.
 sed -i "s/LC_ALL=C expr \"\$userdefault\" : '\[a-z\]\[-a-z0-9\]\*\$'/LC_ALL=C expr \"\$userdefault\" : '^[a-z][-.a-z0-9_]*$'/" /usr/lib/ubiquity/user-setup/user-setup-ask
