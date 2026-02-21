@@ -154,7 +154,7 @@ dpkg-reconfigure keyboard-configuration
 apt install --no-install-recommends -y librsvg2-bin
 curl https://linuxmint.com/web/img/logo-mono.svg | rsvg-convert -h 64 -o /usr/share/plymouth/themes/spinner/watermark.png
 apt remove --auto-remove --purge -y librsvg2-bin
-plymouth-set-default-theme -R bgrt
+update-alternatives --config default.plymouth <<< "1"
 update-initramfs -u -k all
 
 # Allow dots (.) in usernames.
