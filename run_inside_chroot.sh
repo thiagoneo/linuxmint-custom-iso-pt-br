@@ -139,9 +139,10 @@ fi
 
 apt upgrade -y
 # # Remove old kernels and unnecessary packages, and clean up
-# apt purge -y $(dpkg -l 'linux-image-[0-9]*' \
-# | awk '/^ii/{print $2}' \
-# | grep -v "$(uname -r)") && sudo apt autoremove --purge -y
+sudo apt purge -y $(dpkg -l 'linux-image-[0-9]*' \
+| awk '/^ii/{print $2}' \
+| sort -V \
+| head -n -1) && sudo apt autoremove --purge -y
 apt autoremove --purge -y
 apt clean -y
 apt remove --purge "${PKG_REMOVE[@]}"
