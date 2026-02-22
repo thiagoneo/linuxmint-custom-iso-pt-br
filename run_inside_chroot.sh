@@ -120,6 +120,9 @@ PKG_INSTALL=(
     wbrazilian
 )
 
+# Change to a faster mirror for package installation
+sed -i 's;http://packages.linuxmint.com;https://fastly.linuxmint.io;g' /etc/apt/sources.list.d/official-package-repositories.list
+
 # Update system packages
 apt update
 
@@ -207,3 +210,8 @@ echo "NAME_REGEX='^[a-z][-.a-z0-9_]*$'" >> /etc/adduser.conf
 sed -i '/^Exec=/c\
 Exec=sudo --preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_DATA_DIRS,XDG_RUNTIME_DIR,GTK_THEME sh -c '\''debconf-set-selections /cdrom/preseed/preseed.cfg  && WEBKIT_DISABLE_COMPOSITING_MODE=1 ubiquity gtk_ui --automatic'\''' \
 /usr/share/applications/ubiquity.desktop
+
+# Revert to the default and more stable mirror for package installation
+sed -i 's;https://fastly.linuxmint.io;http://packages.linuxmint.com;g' /etc/apt/sources.list.d/official-package-repositories.list
+apt clean
+apt update
