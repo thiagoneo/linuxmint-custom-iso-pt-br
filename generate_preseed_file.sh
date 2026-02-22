@@ -76,7 +76,8 @@ d-i preseed/late_command string \
     in-target bash -c '\
     HOSTNAME="DESKTOP-$(tr -dc A-Z0-9 </dev/urandom | head -c7)"; \
     echo "$HOSTNAME" > /etc/hostname; \
-    sed -i "s/^127.0.1.1.*/127.0.1.1\t$HOSTNAME/" /etc/hosts'
+    echo "127.0.1.1 $HOSTNAME" > /etc/hosts; \
+    echo "netcfg/get_hostname string $HOSTNAME" | debconf-set-selections'
 
 ### Drivers proprietários
 ubiquity ubiquity/use_nonfree boolean true
