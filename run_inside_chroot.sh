@@ -151,8 +151,13 @@ apt clean -y
 apt remove --purge "${PKG_REMOVE[@]}"
 apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork plymouth plymouth-label plymouth-theme-spinner plymouth-theme-ubuntu-text
 
-dpkg-reconfigure locales
-dpkg-reconfigure keyboard-configuration
+echo "locales locales/default_environment_locale select pt_BR.UTF-8" | debconf-set-selections
+echo "locales locales/locales_to_be_generated multiselect pt_BR.UTF-8 UTF-8" | debconf-set-selections
+echo "keyboard-configuration keyboard-configuration/layoutcode string br" | debconf-set-selections
+echo "keyboard-configuration keyboard-configuration/variantcode string abnt2" | debconf-set-selections
+
+DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+DEBIAN_FRONTEND=noninteractive dpkg-reconfigure keyboard-configuration
 
 # Customize Plymouth theme with spinner/bgrt and Mint text logo
 apt install --no-install-recommends -y librsvg2-bin
