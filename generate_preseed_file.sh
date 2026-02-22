@@ -71,14 +71,6 @@ d-i passwd/username string $USERNAME
 d-i passwd/user-password-crypted password $HASH
 d-i user-setup/allow-password-weak boolean true
 
-### Definir hostname aleatório
-d-i preseed/late_command string \
-    in-target bash -c '\
-    HOSTNAME="DESKTOP-$(tr -dc A-Z0-9 </dev/urandom | head -c7)"; \
-    echo "$HOSTNAME" > /etc/hostname; \
-    echo "127.0.1.1 $HOSTNAME" > /etc/hosts; \
-    echo "netcfg/get_hostname string $HOSTNAME" | debconf-set-selections'
-
 ### Drivers proprietários
 ubiquity ubiquity/use_nonfree boolean true
 
