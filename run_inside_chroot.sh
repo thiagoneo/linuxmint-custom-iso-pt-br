@@ -145,7 +145,7 @@ apt upgrade -y
 apt autoremove --purge -y
 apt clean -y
 apt remove --purge "${PKG_REMOVE[@]}"
-apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork
+apt-mark hold ubiquity ubiquity-frontend-gtk ubiquity-casper ubiquity-ubuntu-artwork plymouth plymouth-label plymouth-theme-spinner plymouth-theme-ubuntu-text
 
 dpkg-reconfigure locales
 dpkg-reconfigure keyboard-configuration

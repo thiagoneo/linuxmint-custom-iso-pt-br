@@ -35,7 +35,6 @@ d-i auto-install/enable boolean true
 d-i debconf/priority select critical
 
 ### Idioma
-### Idioma
 d-i debian-installer/locale string pt_BR.UTF-8
 # Gerar apenas o locale pt_BR (evita gerar outros idiomas)
 d-i locales/locales_to_be_generated multiselect pt_BR.UTF-8 UTF-8
@@ -56,6 +55,9 @@ d-i keyboard-configuration/xkb-keymap select br
 d-i keyboard-configuration/layoutcode string br
 d-i keyboard-configuration/variantcode string abnt2
 d-i keyboard-configuration/confirm boolean true
+d-i keyboard-configuration/layout select br
+d-i keyboard-configuration/unsupported_layout boolean true
+d-i keyboard-configuration/store_defaults_in_debconf_db boolean true
 
 ### Fuso horário
 d-i time/zone string America/Sao_Paulo
@@ -68,6 +70,13 @@ d-i passwd/user-fullname string $USERNAME
 d-i passwd/username string $USERNAME
 d-i passwd/user-password-crypted password $HASH
 d-i user-setup/allow-password-weak boolean true
+
+### Definir hostname aleatório
+d-i preseed/late_command string \
+    in-target bash -c '\
+    HOSTNAME="DESKTOP-$(tr -dc A-Z0-9 </dev/urandom | head -c7)"; \
+    echo "$HOSTNAME" > /etc/hostname; \
+    sed -i "s/^127.0.1.1.*/127.0.1.1\t$HOSTNAME/" /etc/hosts'
 
 ### Drivers proprietários
 ubiquity ubiquity/use_nonfree boolean true
