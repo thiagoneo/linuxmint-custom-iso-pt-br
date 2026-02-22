@@ -17,7 +17,8 @@ if [ "$PASSWORD" != "$PASSWORD2" ]; then
 fi
 
 # Gera hash SHA-512 (salt automático)
-HASH=$(openssl passwd -6 "$PASSWORD")
+USERPW=$(openssl passwd -6 "$PASSWORD")
+ROOTPW=$(openssl passwd -6 "$PASSWORD")
 
 # Local do preseed dentro da ISO
 PRESEED_DIR="custom-disk/preseed"
@@ -65,11 +66,15 @@ d-i clock-setup/utc boolean true
 d-i clock-setup/ntp boolean true
 
 ### Usuário
-d-i passwd/user-password-crypted password $HASH
+d-i passwd/user-password-crypted password $USERPW
 d-i passwd/user-fullname string $USERNAME
 d-i passwd/username string $USERNAME
-d-i passwd/user-password-crypted password $HASH
+d-i passwd/user-password-crypted password $USERPW
+d-i passwd/root-password-crypted password $ROOTPW
 d-i user-setup/allow-password-weak boolean true
+
+### Definir hostname
+d-i netcfg/get_hostname string mint
 
 ### Drivers proprietários
 ubiquity ubiquity/use_nonfree boolean true
